@@ -1,12 +1,16 @@
-//头文件
+/*************************************************************************************
+ * 
+ * 基于PCL的一些基本的语句，包括读取点云的坐标、插入和删除点、点云的坐标变换（全局和局部变换）
+ * 删除点云中的无效点。
+ * 
+ * 
+*******************************************************************************************/
 #include <iostream>
 #include <pcl/point_types.h>
 #include  <pcl/point_cloud.h>
 
-//定义函数体
 int main(int argc, char** argv)
 
-//定义点云
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
 	cloud->width = 1000;
 	cloud->height = 1;
@@ -18,12 +22,10 @@ int main(int argc, char** argv)
 		cloud->at(i).z = 1024 * rand() / (RAND_MAX + 1.0f);
 	}
 
-//读取点云
 	#include <pcl/io/pcl_io.h>
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::io::loadPCDFile<pcl::PointXYZ>("C:\office3-after21111.pcd", *cloud);
 
-	//插入和移除点
 	pcl::PointCloud<pcl::PointXYZ>::iterator index = cloud->begin();
 	cloud->erase(index);//删除第一个
 	index = cloud->begin() + 5;
